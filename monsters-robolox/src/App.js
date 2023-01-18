@@ -7,39 +7,30 @@ class App extends Component {
     super();
 
     this.state = {
-      name: { firstName: "Tejas", lastName: "Naik" },
-      company: 'Facebook'
+      monsters: [
+        {
+          name: "Linda",
+          id: "123ertd2"
+        },
+        {
+          name: "Frank",
+          id: "123er5tg2"
+        },
+        {
+          name: "Jacky",
+          id: "123er34df"
+        },
+        {
+          name: "Andrei",
+          id: "123ere5r2"
+        }
+      ],
     }
   }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Hi, I am  {this.state.name.firstName} {this.state.name.lastName}. I work at  {this.state.company}
-          </p>
-          <button onClick={() => {
-            // This code runs asynchronously (you cant see the updated state in console)
-            // this.setState({ name: { firstName: "Andrei", lastName: "Neaogie" } });
-
-            // Synchronous Way
-            this.setState(
-              // Updater function
-              () => {
-                return (
-                  { name: { firstName: "Andrei", lastName: "Neaogie" } }
-                )
-              },
-              // Callback function
-              () => {
-                console.log(this.state)
-              });
-          }}>
-            Change Name
-          </button>
-
-        </header>
+        {this.state.monsters.map((monster) => <div key={monster.id}><h1>{monster.name}</h1></div>)}
       </div>
     );
   }
