@@ -7,30 +7,36 @@ class App extends Component {
     super();
 
     this.state = {
-      monsters: [
-        {
-          name: "Linda",
-          id: "123ertd2"
-        },
-        {
-          name: "Frank",
-          id: "123er5tg2"
-        },
-        {
-          name: "Jacky",
-          id: "123er34df"
-        },
-        {
-          name: "Andrei",
-          id: "123ere5r2"
-        }
-      ],
+      monsters: [],
     }
   }
+
+  // When it first loads (mounts to the dom) only happens once
+  // componentDidMount() {
+  //   fetch("https://jsonplaceholder.typicode.com/users")
+  //     .then(response => response.json()
+  //       .then(users => console.log(users))
+  //     )
+  // }
+
+  async componentDidMount() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const users = await response.json();
+    this.setState(
+      () => {
+        return { monsters: users }
+      }
+    )
+  }
+
   render() {
     return (
       <div className="App">
-        {this.state.monsters.map((monster) => <div key={monster.id}><h1>{monster.name}</h1></div>)}
+        {this.state.monsters.map((monster) => (
+          <div key={monster.id}>
+            <h1>{monster.name}</h1>
+          </div>
+        ))}
       </div>
     );
   }
