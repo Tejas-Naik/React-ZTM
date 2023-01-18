@@ -20,7 +20,21 @@ class App extends Component {
             Hi, I am  {this.state.name.firstName} {this.state.name.lastName}. I work at  {this.state.company}
           </p>
           <button onClick={() => {
-            this.setState({ name: { firstName: "Andrei", lastName: "Neaogie" } });
+            // This code runs asynchronously (you cant see the updated state in console)
+            // this.setState({ name: { firstName: "Andrei", lastName: "Neaogie" } });
+
+            // Synchronous Way
+            this.setState(
+              // Updater function
+              () => {
+                return (
+                  { name: { firstName: "Andrei", lastName: "Neaogie" } }
+                )
+              },
+              // Callback function
+              () => {
+                console.log(this.state)
+              });
           }}>
             Change Name
           </button>
