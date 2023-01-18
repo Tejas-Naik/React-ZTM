@@ -8,31 +8,50 @@ class App extends Component {
 
     this.state = {
       monsters: [],
+      searchField: '',
     }
+    console.log('constructor');
   }
 
   // When it first loads (mounts to the dom) only happens once
-  // componentDidMount() {
-  //   fetch("https://jsonplaceholder.typicode.com/users")
-  //     .then(response => response.json()
-  //       .then(users => console.log(users))
-  //     )
-  // }
-
-  async componentDidMount() {
+  async componentDidMount() { // its a lifycycle method
+    console.log('componentDidMount');
     const response = await fetch("https://jsonplaceholder.typicode.com/users");
     const users = await response.json();
     this.setState(
       () => {
         return { monsters: users }
+      },
+      () => {
+        console.log(this.state)
       }
     )
   }
 
   render() {
+    console.log('render');
+
+    const filteredMonsters = this.state.monsters
+      .filter((monster) => monster.name
+        .toLowerCase()
+        .includes(this.state.searchField));
+
     return (
       <div className="App">
-        {this.state.monsters.map((monster) => (
+        <input
+          className='search-box'
+          type='search'
+          placeholder='Search Monsters'
+          onChange={(e) => {
+            const searchField = e.target.value.toLowerCase();
+            this.setState(() => {
+              return {
+                searchField
+              }
+            });
+          }}
+        />
+        {filteredMonsters.map((monster) => (
           <div key={monster.id}>
             <h1>{monster.name}</h1>
           </div>
