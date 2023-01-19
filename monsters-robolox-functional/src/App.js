@@ -39,7 +39,6 @@ const App = () => {
         placeholder="Search Monsters"
         onChangeHandler={onSearchChange}
       />
-
       <CardList monsters={filteredMonsters} />
     </div>
   )
