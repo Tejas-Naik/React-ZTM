@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root">React is not rendered</div>
+
+    <script
+      src="https://unpkg.com/react@18.2.0/umd/react.development.js"
+      type="application/javascript"
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"
+      type="application/javascript"
+    ></script>
+
+    <!-- Creating app using JS -->
+    <script>
+      const App = () => {
+        return React.createElement("div", {}, [
+          React.createElement(
+            "h1",
+            { className: "title" },
+            "React is rendered!"
+          ),
+        ]);
+      };
+
+      //   ReactDOM.render(
+      //     React.createElement(App),
+      //     document.getElementById("root")
+      //   );
+
+      const domNode = document.getElementById("root");
+      const root = ReactDOM.createRoot(domNode);
+      root.render(App());
+    </script>
+  </body>
+</html>
